@@ -1,0 +1,44 @@
+<div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">Student Calendar</h1>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-10 mb-4">
+        <div class="card text-left shadow h-100 py-2">
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4">
+                    <h3 class="text-gray-900">{{calMonth}}</h3>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" (click)="prevMonth()">Prev</button>
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" (click)="currMonth()">Curr</button>
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" (click)="nextMonth()">Next</button>
+                </div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Sunday</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Wednesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Friday</th>
+                        <th scope="col">Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let week of wk; index as i">
+                        <td appCalStyle [thisMonthDay] = "week[0].thisMonthDay" [today] ="week[0].today"> {{week[0].day}}</td>
+                        <td appCalStyle [thisMonthDay] = "week[1].thisMonthDay" [today] ="week[1].today"> {{week[1].day}}</td>
+                        <td appCalStyle [thisMonthDay] = "week[2].thisMonthDay" [today] ="week[2].today"> {{week[2].day}}</td>
+                        <td appCalStyle [thisMonthDay] = "week[3].thisMonthDay" [today] ="week[3].today"> {{week[3].day}}</td>
+                        <td appCalStyle [thisMonthDay] = "week[4].thisMonthDay" [today] ="week[4].today"> {{week[4].day}}</td>
+                        <td appCalStyle [thisMonthDay] = "week[5].thisMonthDay" [today] ="week[5].today"> {{week[5].day}}</td>
+                        <td appCalStyle [thisMonthDay] = "week[6].thisMonthDay" [today] ="week[6].today"> {{week[6].day}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
