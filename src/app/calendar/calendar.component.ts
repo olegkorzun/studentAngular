@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import * as moment from 'moment';
 import { Day, CalendarData } from '../app.component';
 
@@ -9,7 +9,7 @@ import { Day, CalendarData } from '../app.component';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-
+mobile:boolean;
 calendarObj:CalendarData[] = []
 datetime:moment.Moment = moment()
 wk: Day[][] = [
@@ -71,7 +71,26 @@ currMonth () {
 
 constructor() {}
 
+
+mediaCheck() {
+  // @media
+  if (document.body.offsetWidth < 670) { 
+    //document.body.offsetWidth
+    this.mobile = true;
+  } else {
+    this.mobile = false;
+  }
+}
+
+@HostListener("window:resize", [])
+onResize() {
+  this.mediaCheck();
+}
+
+
 ngOnInit() {
+  this.mediaCheck();
+  // calendar
   let st:string = sessionStorage.getItem('calendar')
   this.calendarObj = JSON.parse(st)
 
