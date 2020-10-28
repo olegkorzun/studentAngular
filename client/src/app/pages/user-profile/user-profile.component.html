@@ -1,0 +1,72 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row justify-content-center">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-info">
+                      <h4 class="card-title">Student Profile</h4>
+                  </div>
+                  <div class="card-body">
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <label>student ID</label>
+                                  <input matInput name="studentID" [(ngModel)]="student.studentID" disabled>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <label>Fist Name</label>
+                                  <input matInput name="firstName" [(ngModel)]="student.firstName" disabled>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <label>Last Name</label>
+                                  <input matInput name="familyName" [(ngModel)]="student.familyName" disabled>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <label>Email</label>
+                                <input matInput name="email" [(ngModel)]="student.email" disabled>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <label>Mobile Number</label>
+                                <input matInput name="mobileNumber" [(ngModel)]="student.mobileNumber" disabled>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <label>Address</label>
+                                  <input matInput name="address" [(ngModel)]="student.address" disabled>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <label>Registery Date</label>
+                                  <input matInput name="registeryDate" type = "date" [(ngModel)]="registeryDate" disabled>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

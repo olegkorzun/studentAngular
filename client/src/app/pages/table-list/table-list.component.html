@@ -1,0 +1,97 @@
+<div class="main-content">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-12">
+    <div class="card">
+     <div class="card-header card-header-info">
+      <h4 class="card-title ">Student Courses</h4>
+     </div>
+     <div class="card-body">
+     <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+         <th>ID</th>
+         <th>Course</th>
+         <th>Exam</th>
+         <th>Project</th>
+         <th>Date</th>
+         <th>Teacher</th>
+         <th>Status</th>
+         <th>Attendance/Lessons</th>
+
+        </thead>
+        <tbody>
+         <tr *ngFor="let course of courses; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+           <a 
+            *ngIf="course.cycle; else elseBlock1" 
+            [ngStyle]="{ 'cursor':'pointer','font-weight':'500','color':'#9c27b0'}" 
+            (click)="getAtendanceData(course)">
+             {{course.courseName}}
+           </a>
+           <ng-template #elseBlock1>
+            {{course.courseName}}
+           </ng-template>
+          </td>
+          <td>{{course.examMark}}</td>
+          <td>{{course.projectMark}}</td>
+          <td>{{course.update_date | date: 'dd/MM/yyyy'}}</td>
+          <td>{{course.teach_name}}</td>
+          <td>{{course.status}}</td>    
+          <td>
+            <a 
+            *ngIf="course.sess>0; else elseBlock2" 
+            [ngStyle]="{ 'cursor':'pointer','font-weight':'500','color':'#9c27b0', 'align':'center'}" 
+            (click)="getAtendanceData(course)">
+              {{course.vis}} / {{course.sess}}
+            </a>
+            <ng-template #elseBlock2>
+               
+             </ng-template>
+          </td>        
+
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<jw-modal id="custom-modal-2" >
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-2');">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4  *ngIf="isAttendance">Lessons Course: {{attendance[0].course_name}}</h4>
+  <p *ngIf="isAttendance">Conference URL: {{cour.url}}</p>
+  <div *ngIf="isAttendance" class="table-responsive">
+    <table class="table table-sm table-info">
+      <thead>
+        <th>Lession num</th>
+        <th>Lesson type</th>
+        <th>Location</th>
+        <th>Teacher</th>
+        <th>Date Time</th>
+        <th>Attendance</th>
+        <th>Video</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let att of attendance">      
+          <td>{{att.sessionNum}}</td>
+          <td>{{att.type}}</td>
+          <td>{{att.location}}</td>
+          <td>{{att.teacher}}</td>
+          <td>{{att.sessionDate | date:'dd/MM/yyyy HH:mm'}}</td>
+          <td>{{att.visit}}</td>
+          <td> 
+            <a *ngIf="att.url_video" target="_blank" [href]="att.url_video">video</a> 
+          </td>    
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</jw-modal>

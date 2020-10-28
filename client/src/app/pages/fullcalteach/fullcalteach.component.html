@@ -1,0 +1,72 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <div class='app'>
+          <div class='app-calendar' *ngIf="calendarVisible">
+            <full-calendar
+              #calendar
+              defaultView="dayGridMonth"
+              [header]="{
+                left: 'prev,next',
+                center: 'title',
+                right: 'today'
+              }"
+              [plugins]="calendarPlugins"
+              [weekends]="calendarWeekends"
+              [events]="calendarEvents"
+              (dateClick)="handleDateClick($event)"
+              (eventClick)="eventClick($event)"
+              (eventMouseEnter)="mouseEnter($event)"
+              (eventMouseLeave)="mouseLeave($event)"
+            ></full-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<jw-modal id="custom-modal-2" >
+  <button 
+  type="button" 
+  class="close" 
+  data-dismiss="modal" 
+  aria-label="Close" 
+  (click)="closeModal('custom-modal-2');">
+  <span aria-hidden="true">&times;</span>
+  </button>
+    <h4 [ngStyle]="{'color': eventColor}">Attendance {{calEvent.type}}: {{calEvent.courseName}}</h4>
+    <p>Session: {{calEvent.session_num}} {{calEvent.location}} {{calEvent.sessionDate}}</p>
+    <form #f="ngForm" novalidate>
+      <table class="table table-sm table-info">
+        <thead>
+          <th>No</th>
+          <th>Id</th>
+          <th>Student</th>
+          <th>Attendance</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let visit of visits; let i=index">
+            <td>
+              {{i + 1}}
+            </td>
+            <td>
+              {{visit.studentID}}
+            </td>
+            <td>
+              {{visit.firstName}} {{visit.familyName}}
+            </td>
+            <td>
+              <input [name]="''+visit.studentID" type="checkbox" [(ngModel)]="visit.visit" >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button 
+      class="btn btn-outline-success btn-sm waves-effect" 
+      (click)="saveVisits(calEvent.cyclecode, calEvent.session_num , calEvent.sessionDate ,f)"
+      >Save Attendancy</button>
+
+    </form>
+</jw-modal>

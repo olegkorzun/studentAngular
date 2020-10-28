@@ -1,0 +1,111 @@
+<div class="main-content">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-12">
+    <div class="card">
+     <div class="card-header card-header-info">
+      <h4 class="card-title ">Teacher Cycles</h4>
+     </div>
+     <div class="card-body">
+     <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+         <th>No</th>
+         <th>Cycle</th>
+         <th>Course Code</th>
+         <th>Course Name</th>
+         <th>Open Date</th>
+         <th>Hours</th>
+         <th>Students</th>
+        </thead>
+        <tbody>
+         <tr 
+         *ngFor="let course of teacherCycles; index as i" 
+         (click)="course.students > 0 && getCycleStudents(course.code)"
+         [ngClass]="{'students-class': course.students > 0 }"
+         >
+          <td>{{i+1}}</td>
+          <td>{{course.code}}</td>
+          <td>{{course.courseCode}}</td>
+          <td>{{course.courseName}}</td>
+          <td>{{course.opendate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{course.hours}}</td> 
+          <td>{{course.students}}</td>  
+         </tr>
+        </tbody>
+       </table>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<jw-modal id="custom-modal-4" >
+  <button 
+  type="button" 
+  class="close" 
+  data-dismiss="modal" 
+  aria-label="Close" 
+  (click)="closeModal('custom-modal-4');"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h4 *ngIf="isCycleStudents">Course {{cycleStudents[0].courseName}} </h4>
+  <form *ngIf="isCycleStudents" #f="ngForm" novalidate>
+    <div class="table-responsive">
+      <table class="table table-sm table-info">
+        <thead>
+          <th>No</th>
+          <th>studentID</th>
+          <th>Name</th>
+          <th>Mobile Numbe</th>
+          <th>Email</th>
+          <th>Location</th>
+          <th>exam Mark</th>
+          <th>Project Mark</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cycle of cycleStudents; let i=index" >
+            <td>{{i+1}}</td>
+            <td>{{cycle.studentID}}</td>
+            <td>{{cycle.firstName}} {{cycle.familyName}}</td>
+            <td>{{cycle.mobileNumber}}</td>
+            <td>{{cycle.email}}</td>
+            <td>
+              <div *ngIf="cycle.location===100">Tel Aviv</div>
+              <div *ngIf="cycle.location===200">Haifa</div>
+            </td>
+            <td>
+              <mat-form-field>
+                <input 
+                matInput 
+                [name]="'e'+cycle.studentID" 
+                type="number"  
+                min="0" max="100"
+                [(ngModel)]="cycle.examMark" 
+                >
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field >
+                <input 
+                matInput 
+                [name]="'p'+cycle.studentID" 
+                type="number"  
+                min="0" max="100"
+                [(ngModel)]="cycle.projectMark" 
+                >
+              </mat-form-field>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button 
+    class="btn btn-outline-success btn-sm waves-effect" 
+    (click)="saveMarks(cycleStudents[0].courseCode,f)"
+    >Save Marks</button>
+  </form>
+</jw-modal>

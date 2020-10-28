@@ -1,0 +1,15 @@
+.att_table {
+    padding-left: 1rem;
+}
+
+.students-class {
+    font-weight: bold;
+}
+.students-class:hover {
+    cursor:     pointer;
+    background: #b4b4b433;
+}
+
+mat-form-field {
+    width:  70px;
+}

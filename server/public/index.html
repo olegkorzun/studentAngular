@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>login Student</title>
+    </head>
+    <body>
+        <h2>login Student</h2>
+        <form id="frm" method="post" action="https://rtfs0620.xyz/login">
+            <label for="username">Login:</label><br>
+            <input type="text" name="username" id="username" /><br>
+            <label for="password">Password:</label><br>
+            <input type="password" name="password" id="password" /><br>
+            <input type="submit" value="Login">
+        </form> 
+
+        <script>
+            frm.onsubmit =  async (e) => {
+                e.preventDefault();
+                let data1 = {
+                    username: frm.elements["username"].value,
+                    password: frm.elements["password"].value,
+                }
+                try {
+                    // first request - login 
+                    let serverData1;
+                    let response1 = await fetch('https://rt-students.xyz:8000/login', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json;charset=utf-8'},
+                        body: JSON.stringify(data1)
+                    });
+                    serverData1 = await response1.json();
+                    console.log(serverData1);
+                    const token = serverData1.token;
+
+                    //second request
+                    let serverData2;
+                    let response2 = await fetch('https://rt-students.xyz:8000/videotest', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8',
+                            'Authorization': 'Bearer '+ token,
+                        },
+                        body: JSON.stringify({mydata:"Test"})
+                    });
+                    serverData2 = await response2.json();
+                    console.log(serverData2);
+
+
+                } catch (er) {
+                    console.log(er);
+                }
+
+            }
+        </script>
+    </body>
+</html>
