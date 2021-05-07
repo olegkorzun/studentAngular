@@ -54,7 +54,7 @@
     "rxjs": "6.5.2",
     "rxjs-compat": "6.5.2",
     "socket.io-client": "^2.3.0",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "web-animations-js": "2.3.1",
     "zone.js": "0.10.2"
   },
